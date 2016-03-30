@@ -368,8 +368,10 @@ function google_seo_plugin_status()
 
                     if(strpos($rule, '{url}') !== false)
                     {
-                        $url = "([^./]+)";
+                        $url = "(.+)";
                         $rule = google_seo_expand($rule, array('url' => $url));
+                        $rest = substr($rule, 0, 1);
+                        if ($rest == '/'){$rule = substr($rule, 1);}
                         $rule = "RewriteRule ^{$rule}\$ {$v[1]}?{$v[4]}{$v[2]}=\$1 [L,QSA,NC]";
                     }
 
